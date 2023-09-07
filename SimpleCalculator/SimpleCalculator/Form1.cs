@@ -7,22 +7,25 @@ namespace SimpleCalculator
 
 	public partial class Form : System.Windows.Forms.Form
 	{
+		public Form()
+		{
+			InitializeComponent();
+		}
+
+		private int currentValue = 0; // valueA = 0, valueB = 1
 		private double valueA = 0;
 		private double valueB = 0;
 		private double valueResult = 0;
 
 		private Operators operation = Operators.None;
 
-		private string userNumber = " ";
-		private string userOperation = " ";
+		private string userNumber = " "; // 60
+		private string userOperation = " "; // + - * /
+		private string numberSign = ""; // +/-
+
 		private bool initialInput = false;
 		private bool decimalAdded = false;
 		private bool negativeSign = false;
-
-		public Form()
-		{
-			InitializeComponent();
-		}
 
 		public void Form1_Load(object sender, EventArgs e)
 		{
@@ -47,6 +50,7 @@ namespace SimpleCalculator
 			userNumber = "0";
 			userOperation = " ";
 
+			currentValue = 0;
 			valueA = 0;
 			valueB = 0;
 			valueResult = 0;
@@ -55,91 +59,6 @@ namespace SimpleCalculator
 
 			UpdateResultText();
 		}
-
-		#region Buttons 1-9
-		private void buttonNum0_Click(object sender, EventArgs e)
-		{
-			// making sure we avoid a situation where the 'textResult = 0000'
-			if (userNumber != "0")
-			{
-				userNumber += "0";
-
-				UpdateResultText();
-			}
-		}
-
-		private void buttonNum1_Click(object sender, EventArgs e)
-		{
-			IsInitialInput();
-			userNumber += "1";
-
-			UpdateResultText();
-		}
-
-		private void buttonNum2_Click(object sender, EventArgs e)
-		{
-			IsInitialInput();
-			userNumber += "2";
-
-			UpdateResultText();
-		}
-
-		private void buttonNum3_Click(object sender, EventArgs e)
-		{
-			IsInitialInput();
-			userNumber += "3";
-
-			UpdateResultText();
-		}
-
-		private void buttonNum4_Click(object sender, EventArgs e)
-		{
-			IsInitialInput();
-			userNumber += "4";
-
-			UpdateResultText();
-		}
-
-		private void buttonNum5_Click(object sender, EventArgs e)
-		{
-			IsInitialInput();
-			userNumber += "5";
-
-			UpdateResultText();
-		}
-
-		private void buttonNum6_Click(object sender, EventArgs e)
-		{
-			IsInitialInput();
-			userNumber += "6";
-
-			UpdateResultText();
-		}
-
-		private void buttonNum7_Click(object sender, EventArgs e)
-		{
-			IsInitialInput();
-			userNumber += "7";
-
-			UpdateResultText();
-		}
-
-		private void buttonNum8_Click(object sender, EventArgs e)
-		{
-			IsInitialInput();
-			userNumber += "8";
-
-			UpdateResultText();
-		}
-
-		private void buttonNum9_Click(object sender, EventArgs e)
-		{
-			IsInitialInput();
-			userNumber += "9";
-
-			UpdateResultText();
-		}
-		#endregion
 
 		private void buttonDecimal_Click(object sender, EventArgs e)
 		{
@@ -229,6 +148,7 @@ namespace SimpleCalculator
 			if (operation != Operators.Add)
 			{
 				operation = Operators.Add;
+				currentValue = 1;
 				userOperation = " + ";
 
 				valueA = Convert.ToDouble(userNumber);
@@ -240,6 +160,7 @@ namespace SimpleCalculator
 			if (operation != Operators.Subtract)
 			{
 				operation = Operators.Subtract;
+				currentValue = 1;
 				userOperation = " - ";
 
 				valueA = Convert.ToDouble(userNumber);
@@ -251,6 +172,7 @@ namespace SimpleCalculator
 			if (operation != Operators.Multiply)
 			{
 				operation = Operators.Multiply;
+				currentValue = 1;
 				userOperation = " * ";
 
 				valueA = Convert.ToDouble(userNumber);
@@ -262,6 +184,7 @@ namespace SimpleCalculator
 			if (operation != Operators.Divide)
 			{
 				operation = Operators.Divide;
+				currentValue = 1;
 				userOperation = " ÷ ";
 
 				valueA = Convert.ToDouble(userNumber);
@@ -271,6 +194,8 @@ namespace SimpleCalculator
 
 		private void buttonEquals_Click(object sender, EventArgs e)
 		{
+			currentValue = 0;
+
 			switch (operation)
 			{
 				case Operators.Add:
@@ -289,10 +214,6 @@ namespace SimpleCalculator
 					valueResult = CalculatorFunctions.SimpleDivide(valueA, valueB);
 					break;
 			}
-
-			
-
-
 		}
 	}
 }
