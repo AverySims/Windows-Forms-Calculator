@@ -29,7 +29,6 @@
 		private void InitializeComponent()
 		{
 			FlowLayoutPanel flowLayoutPanel1;
-			textResult = new TextBox();
 			buttonClear = new Button();
 			buttonSquareRoot = new Button();
 			buttonPercentage = new Button();
@@ -50,23 +49,10 @@
 			buttonNum0 = new Button();
 			buttonDecimal = new Button();
 			buttonEquals = new Button();
+			textResult = new TextBox();
 			flowLayoutPanel1 = new FlowLayoutPanel();
 			flowLayoutPanel1.SuspendLayout();
 			SuspendLayout();
-			// 
-			// textResult
-			// 
-			textResult.Anchor = AnchorStyles.Top;
-			textResult.BorderStyle = BorderStyle.None;
-			textResult.Enabled = false;
-			textResult.Font = new Font("Segoe UI", 27F, FontStyle.Regular, GraphicsUnit.Point);
-			textResult.Location = new Point(12, 70);
-			textResult.Name = "textResult";
-			textResult.Size = new Size(325, 48);
-			textResult.TabIndex = 12;
-			textResult.TabStop = false;
-			textResult.Text = "0";
-			textResult.TextAlign = HorizontalAlignment.Right;
 			// 
 			// flowLayoutPanel1
 			// 
@@ -107,6 +93,7 @@
 			buttonClear.TabStop = false;
 			buttonClear.Text = "Clear";
 			buttonClear.UseVisualStyleBackColor = true;
+			buttonClear.Click += buttonClear_Click;
 			// 
 			// buttonSquareRoot
 			// 
@@ -351,6 +338,7 @@
 			buttonDecimal.TabStop = false;
 			buttonDecimal.Text = ".";
 			buttonDecimal.UseVisualStyleBackColor = true;
+			buttonDecimal.Click += buttonDecimal_Click;
 			// 
 			// buttonEquals
 			// 
@@ -364,6 +352,22 @@
 			buttonEquals.TabStop = false;
 			buttonEquals.Text = "=";
 			buttonEquals.UseVisualStyleBackColor = true;
+			// 
+			// textResult
+			// 
+			textResult.Anchor = AnchorStyles.Top;
+			textResult.BackColor = SystemColors.MenuBar;
+			textResult.BorderStyle = BorderStyle.None;
+			textResult.Enabled = false;
+			textResult.Font = new Font("Segoe UI", 36F, FontStyle.Regular, GraphicsUnit.Point);
+			textResult.Location = new Point(12, 70);
+			textResult.Name = "textResult";
+			textResult.Size = new Size(325, 64);
+			textResult.TabIndex = 12;
+			textResult.TabStop = false;
+			textResult.Text = "0";
+			textResult.TextAlign = HorizontalAlignment.Right;
+			textResult.TextChanged += textResult_TextChanged;
 			// 
 			// Form
 			// 
