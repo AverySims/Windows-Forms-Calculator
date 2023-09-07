@@ -93,7 +93,6 @@
 			buttonClear.TabStop = false;
 			buttonClear.Text = "Clear";
 			buttonClear.UseVisualStyleBackColor = true;
-			buttonClear.Click += buttonClear_Click;
 			// 
 			// buttonSquareRoot
 			// 
@@ -133,7 +132,6 @@
 			buttonDivide.TabStop = false;
 			buttonDivide.Text = "÷";
 			buttonDivide.UseVisualStyleBackColor = true;
-			buttonDivide.Click += buttonDivide_Click;
 			// 
 			// buttonNum7
 			// 
@@ -147,7 +145,6 @@
 			buttonNum7.TabStop = false;
 			buttonNum7.Text = "7";
 			buttonNum7.UseVisualStyleBackColor = true;
-			buttonNum7.Click += buttonNum7_Click;
 			// 
 			// buttonNum8
 			// 
@@ -161,7 +158,6 @@
 			buttonNum8.TabStop = false;
 			buttonNum8.Text = "8";
 			buttonNum8.UseVisualStyleBackColor = true;
-			buttonNum8.Click += buttonNum8_Click;
 			// 
 			// buttonNum9
 			// 
@@ -175,7 +171,6 @@
 			buttonNum9.TabStop = false;
 			buttonNum9.Text = "9";
 			buttonNum9.UseVisualStyleBackColor = true;
-			buttonNum9.Click += buttonNum9_Click;
 			// 
 			// buttonMultiply
 			// 
@@ -189,7 +184,6 @@
 			buttonMultiply.TabStop = false;
 			buttonMultiply.Text = "*";
 			buttonMultiply.UseVisualStyleBackColor = true;
-			buttonMultiply.Click += buttonMultiply_Click;
 			// 
 			// buttonNum4
 			// 
@@ -203,7 +197,6 @@
 			buttonNum4.TabStop = false;
 			buttonNum4.Text = "4";
 			buttonNum4.UseVisualStyleBackColor = true;
-			buttonNum4.Click += buttonNum4_Click;
 			// 
 			// buttonNum5
 			// 
@@ -217,7 +210,6 @@
 			buttonNum5.TabStop = false;
 			buttonNum5.Text = "5";
 			buttonNum5.UseVisualStyleBackColor = true;
-			buttonNum5.Click += buttonNum5_Click;
 			// 
 			// buttonNum6
 			// 
@@ -231,7 +223,6 @@
 			buttonNum6.TabStop = false;
 			buttonNum6.Text = "6";
 			buttonNum6.UseVisualStyleBackColor = true;
-			buttonNum6.Click += buttonNum6_Click;
 			// 
 			// buttonSubtract
 			// 
@@ -245,7 +236,6 @@
 			buttonSubtract.TabStop = false;
 			buttonSubtract.Text = "-";
 			buttonSubtract.UseVisualStyleBackColor = true;
-			buttonSubtract.Click += buttonSubtract_Click;
 			// 
 			// buttonNum1
 			// 
@@ -259,7 +249,6 @@
 			buttonNum1.TabStop = false;
 			buttonNum1.Text = "1";
 			buttonNum1.UseVisualStyleBackColor = true;
-			buttonNum1.Click += buttonNum1_Click;
 			// 
 			// buttonNum2
 			// 
@@ -273,7 +262,7 @@
 			buttonNum2.TabStop = false;
 			buttonNum2.Text = "2";
 			buttonNum2.UseVisualStyleBackColor = true;
-			buttonNum2.Click += this.buttonNum0_Click;
+			buttonNum2.Click += buttonNum0_Click;
 			// 
 			// buttonNum3
 			// 
@@ -287,7 +276,6 @@
 			buttonNum3.TabStop = false;
 			buttonNum3.Text = "3";
 			buttonNum3.UseVisualStyleBackColor = true;
-			buttonNum3.Click += this.buttonNum0_Click;
 			// 
 			// buttonAdd
 			// 
@@ -301,7 +289,6 @@
 			buttonAdd.TabStop = false;
 			buttonAdd.Text = "+";
 			buttonAdd.UseVisualStyleBackColor = true;
-			buttonAdd.Click += buttonAdd_Click;
 			// 
 			// buttonSign
 			// 
@@ -328,7 +315,6 @@
 			buttonNum0.TabStop = false;
 			buttonNum0.Text = "0";
 			buttonNum0.UseVisualStyleBackColor = true;
-			buttonNum0.Click += this.buttonNum0_Click;
 			// 
 			// buttonDecimal
 			// 
@@ -342,7 +328,6 @@
 			buttonDecimal.TabStop = false;
 			buttonDecimal.Text = ".";
 			buttonDecimal.UseVisualStyleBackColor = true;
-			buttonDecimal.Click += buttonDecimal_Click;
 			// 
 			// buttonEquals
 			// 
@@ -356,7 +341,6 @@
 			buttonEquals.TabStop = false;
 			buttonEquals.Text = "=";
 			buttonEquals.UseVisualStyleBackColor = true;
-			buttonEquals.Click += buttonEquals_Click;
 			// 
 			// textResult
 			// 
@@ -372,7 +356,6 @@
 			textResult.TabStop = false;
 			textResult.Text = "0";
 			textResult.TextAlign = HorizontalAlignment.Right;
-			textResult.TextChanged += textResult_TextChanged;
 			// 
 			// Form
 			// 
