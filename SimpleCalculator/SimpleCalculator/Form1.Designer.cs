@@ -273,7 +273,7 @@
 			buttonNum2.TabStop = false;
 			buttonNum2.Text = "2";
 			buttonNum2.UseVisualStyleBackColor = true;
-			buttonNum2.Click += buttonNum2_Click;
+			buttonNum2.Click += this.buttonNum0_Click;
 			// 
 			// buttonNum3
 			// 
@@ -287,7 +287,7 @@
 			buttonNum3.TabStop = false;
 			buttonNum3.Text = "3";
 			buttonNum3.UseVisualStyleBackColor = true;
-			buttonNum3.Click += buttonNum3_Click;
+			buttonNum3.Click += this.buttonNum0_Click;
 			// 
 			// buttonAdd
 			// 
@@ -315,7 +315,6 @@
 			buttonSign.TabStop = false;
 			buttonSign.Text = "+/-";
 			buttonSign.UseVisualStyleBackColor = true;
-			buttonSign.Click += buttonSign_Click;
 			// 
 			// buttonNum0
 			// 
@@ -329,7 +328,7 @@
 			buttonNum0.TabStop = false;
 			buttonNum0.Text = "0";
 			buttonNum0.UseVisualStyleBackColor = true;
-			buttonNum0.Click += buttonNum0_Click;
+			buttonNum0.Click += this.buttonNum0_Click;
 			// 
 			// buttonDecimal
 			// 
