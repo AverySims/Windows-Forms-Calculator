@@ -12,9 +12,9 @@ namespace SimpleCalculator
 		private Font defaultResultFont;
 
 		private bool operationPerformed = false;
-		private bool isDecimal = false;
-		
+
 		private string operationFunctional = "";
+		private string selectedOperator = "";
 		private double result = 0;
 
 		public Form()
@@ -36,7 +36,7 @@ namespace SimpleCalculator
 			Button button = (Button)sender;
 
 			// Clearing the resultTextBox when the text is 0 or an operation has been performed.
-			if ((resultTextBox.Text == "0" || operationPerformed) && !isDecimal)
+			if ((resultTextBox.Text == "0" || operationPerformed) && !resultTextBox.Text.Contains("."))
 			{
 				resultTextBox.Clear();
 			}
@@ -48,34 +48,34 @@ namespace SimpleCalculator
 
 		private void OnDecimal_Click(object sender, EventArgs e)
 		{
-			isDecimal = true;
-
 			if (operationPerformed)
 			{
 				resultTextBox.Text = "0";
 			}
 
-			resultTextBox.Text += ".";
+			if (!resultTextBox.Text.Contains("."))
+			{
+				resultTextBox.Text += ".";
+			}
 		}
 
 		private void OnOperand_Click(object sender, EventArgs e)
 		{
 			operationPerformed = true;
-			isDecimal = false;
 
 			// Saving the sender as a button to access the button's text
 			Button button = (Button)sender;
 
 			// The button's operation is saved within its tag, so we convert it to a string to determine the proper operation.
 			string tempOperationVisual = button.Text;
-			string tempOperationFunctional = button.Tag.ToString() ?? "null";
+			selectedOperator = button.Tag.ToString() ?? "null";
 
 			resultLabel.Text += $" {resultTextBox.Text} {tempOperationVisual}";
 
 			SwitchOnOperand();
 
 			result = double.Parse(resultTextBox.Text);
-			operationFunctional = tempOperationFunctional;
+
 		}
 
 		private void Clear_Click(object sender, EventArgs e)
@@ -83,24 +83,27 @@ namespace SimpleCalculator
 			resultTextBox.Text = "0";
 			resultLabel.Text = "";
 
-			isDecimal = false;
 			result = 0;
 			operationFunctional = "";
+			selectedOperator = "";
 		}
 
 		private void Equals_Click(object sender, EventArgs e)
 		{
 			operationPerformed = true;
-			resultLabel.Text = "";
+			{
+				operationFunctional = selectedOperator;
+				resultLabel.Text = "";
 
-			SwitchOnOperand();
+				SwitchOnOperand();
 
-			result = double.Parse(resultTextBox.Text);
-			resultTextBox.Text = result.ToString();
+				result = double.Parse(resultTextBox.Text);
+				resultTextBox.Text = result.ToString();
 
-			isDecimal = false;
-			result = 0;
-			operationFunctional = "";
+				result = 0;
+				operationFunctional = "";
+				selectedOperator = "";
+			}
 		}
 
 		private void SwitchOnOperand()
@@ -130,6 +133,7 @@ namespace SimpleCalculator
 		{
 			resultTextBox.Font = AdjustFontBasedOnLength(resultTextBox.Text, defaultResultFont, 12);
 		}
+
 		public static Font AdjustFontBasedOnLength(string inputText, Font originalFont, int maxLength)
 		{
 			if (inputText.Length > maxLength)
