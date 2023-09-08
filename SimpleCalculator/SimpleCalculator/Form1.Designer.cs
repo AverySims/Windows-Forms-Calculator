@@ -117,6 +117,7 @@
 			buttonSquareRoot.Tag = "Square Root";
 			buttonSquareRoot.Text = "√";
 			buttonSquareRoot.UseVisualStyleBackColor = false;
+			buttonSquareRoot.Click += buttonSquareRoot_Click;
 			// 
 			// buttonPercentage
 			// 
@@ -135,6 +136,7 @@
 			buttonPercentage.Tag = "Percentage";
 			buttonPercentage.Text = "%";
 			buttonPercentage.UseVisualStyleBackColor = false;
+			buttonPercentage.Click += buttonPercentage_Click;
 			// 
 			// buttonDivide
 			// 
