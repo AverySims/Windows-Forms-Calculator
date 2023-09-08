@@ -26,6 +26,9 @@ namespace SimpleCalculator
 			defaultResultFont = resultTextBox.Font;
 		}
 
+
+		// TODO: Add square root and percent functions
+
 		/// <summary>
 		/// Runs when a number button is clicked. Adds the number to the resultTextBox as the value to be calculated.
 		/// </summary>
