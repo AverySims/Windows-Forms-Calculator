@@ -391,6 +391,7 @@
 			buttonSign.Tag = "Sign";
 			buttonSign.Text = "+/-";
 			buttonSign.UseVisualStyleBackColor = false;
+			buttonSign.Click += SignChange_Click;
 			// 
 			// buttonNum0
 			// 

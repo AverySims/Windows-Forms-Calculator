@@ -2,11 +2,6 @@ using System;
 
 namespace SimpleCalculator
 {
-	public enum Operators
-	{
-		Add, Subtract, Multiply, Divide, Pow, Percent, None
-	}
-
 	public partial class Form : System.Windows.Forms.Form
 	{
 		private Font defaultResultFont;
@@ -31,6 +26,11 @@ namespace SimpleCalculator
 			defaultResultFont = resultTextBox.Font;
 		}
 
+		/// <summary>
+		/// Runs when a number button is clicked. Adds the number to the resultTextBox as the value to be calculated.
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void OnNumber_Click(object sender, EventArgs e)
 		{
 			// Saving the sender as a button to access the button's text
@@ -47,6 +47,25 @@ namespace SimpleCalculator
 			operationPerformed = false;
 		}
 
+		/// <summary>
+		/// Runs when the current value in the resultTextBox is to be change from positive to negative or vice versa.
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private void SignChange_Click(object sender, EventArgs e)
+		{
+			// Change the sign of the number in the resultTextBox
+			double currentValue = double.Parse(resultTextBox.Text);
+			double newValue = -currentValue;
+			resultTextBox.Text = newValue.ToString();
+
+		}
+
+		/// <summary>
+		/// Adds a decimal to the current value in the resultTextBox. Only one decimal can be added per value.
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void OnDecimal_Click(object sender, EventArgs e)
 		{
 			if (operationPerformed)
@@ -61,6 +80,11 @@ namespace SimpleCalculator
 			}
 		}
 
+		/// <summary>
+		/// Runs when an operation button is clicked. Saves the operation to be performed and the current value in the resultTextBox.
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void OnOperand_Click(object sender, EventArgs e)
 		{
 			operationPerformed = true;
@@ -85,6 +109,11 @@ namespace SimpleCalculator
 
 		}
 
+		/// <summary>
+		/// Clears the resultTextBox and resets the result, isDecimal, operationFunctional, and selectedOperator variables to their default values.
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void Clear_Click(object sender, EventArgs e)
 		{
 			resultTextBox.Text = "0";
@@ -96,6 +125,11 @@ namespace SimpleCalculator
 			selectedOperator = "";
 		}
 
+		/// <summary>
+		/// Exectues the operation selected by the user and displays the result in the resultTextBox. The result is also saved to the result variable for future operations.
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void Equals_Click(object sender, EventArgs e)
 		{
 			operationPerformed = true;
@@ -115,6 +149,9 @@ namespace SimpleCalculator
 			}
 		}
 
+		/// <summary>
+		/// Switch statement to determine which operation to perform based on the operationFunctional variable.
+		/// </summary>
 		private void SwitchOnOperand()
 		{
 			switch (operationFunctional.ToLower())
@@ -137,12 +174,23 @@ namespace SimpleCalculator
 			}
 		}
 
-		// attempting to change text font size based on string length
+		/// <summary>
+		/// Runs when the resultTextBox text is changed. Adjusts the font size of the resultTextBox based on the length of the text.
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void Result_TextChanged(object sender, EventArgs e)
 		{
 			resultTextBox.Font = AdjustFontBasedOnLength(resultTextBox.Text, defaultResultFont, 12);
 		}
 
+		/// <summary>
+		/// Adjusts the font size of the resultTextBox based on the length of the text.
+		/// </summary>
+		/// <param name="inputText">The string of text to check the length of</param>
+		/// <param name="originalFont">Font reference when string should be default size</param>
+		/// <param name="maxLength">The maximum length of the string before resizing occurs</param>
+		/// <returns></returns>
 		public static Font AdjustFontBasedOnLength(string inputText, Font originalFont, int maxLength)
 		{
 			if (inputText.Length > maxLength)
