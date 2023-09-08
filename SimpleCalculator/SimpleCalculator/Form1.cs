@@ -12,6 +12,7 @@ namespace SimpleCalculator
 		private Font defaultResultFont;
 
 		private bool operationPerformed = false;
+		private bool isDecimal = false;
 
 		private string operationFunctional = "";
 		private string selectedOperator = "";
@@ -36,7 +37,7 @@ namespace SimpleCalculator
 			Button button = (Button)sender;
 
 			// Clearing the resultTextBox when the text is 0 or an operation has been performed.
-			if ((resultTextBox.Text == "0" || operationPerformed) && !resultTextBox.Text.Contains("."))
+			if ((resultTextBox.Text == "0" || operationPerformed) && !isDecimal)
 			{
 				resultTextBox.Clear();
 			}
@@ -53,9 +54,10 @@ namespace SimpleCalculator
 				resultTextBox.Text = "0";
 			}
 
-			if (!resultTextBox.Text.Contains("."))
+			if (!isDecimal)
 			{
 				resultTextBox.Text += ".";
+				isDecimal = true;
 			}
 		}
 
@@ -66,15 +68,20 @@ namespace SimpleCalculator
 			// Saving the sender as a button to access the button's text
 			Button button = (Button)sender;
 
-			// The button's operation is saved within its tag, so we convert it to a string to determine the proper operation.
-			string tempOperationVisual = button.Text;
-			selectedOperator = button.Tag.ToString() ?? "null";
+			if (selectedOperator != button.Tag.ToString())
+			{
+				// The button's operation is saved within its tag, so we convert it to a string to determine the proper operation.
+				string tempOperationVisual = button.Text;
+				selectedOperator = button.Tag.ToString() ?? "null";
 
-			resultLabel.Text += $" {resultTextBox.Text} {tempOperationVisual}";
+				resultLabel.Text = $" {resultTextBox.Text} {tempOperationVisual}";
 
-			SwitchOnOperand();
+				SwitchOnOperand();
 
-			result = double.Parse(resultTextBox.Text);
+				result = double.Parse(resultTextBox.Text);
+			}
+
+			isDecimal = false;
 
 		}
 
@@ -84,6 +91,7 @@ namespace SimpleCalculator
 			resultLabel.Text = "";
 
 			result = 0;
+			isDecimal = false;
 			operationFunctional = "";
 			selectedOperator = "";
 		}
@@ -101,6 +109,7 @@ namespace SimpleCalculator
 				resultTextBox.Text = result.ToString();
 
 				result = 0;
+				isDecimal = false;
 				operationFunctional = "";
 				selectedOperator = "";
 			}
