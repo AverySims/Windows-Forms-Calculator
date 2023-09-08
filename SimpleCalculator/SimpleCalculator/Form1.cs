@@ -1,3 +1,5 @@
+using System;
+
 namespace SimpleCalculator
 {
 	public enum Operators
@@ -7,6 +9,14 @@ namespace SimpleCalculator
 
 	public partial class Form : System.Windows.Forms.Form
 	{
+		private Font defaultResultFont;
+
+		private bool operationPerformed = false;
+		private bool isDecimal = false;
+		
+		private string operationFunctional = "";
+		private double result = 0;
+
 		public Form()
 		{
 			InitializeComponent();
@@ -14,63 +24,129 @@ namespace SimpleCalculator
 
 		public void Form1_Load(object sender, EventArgs e)
 		{
+			resultLabel.Text = "";
+			resultTextBox.Text = "0";
 
+			defaultResultFont = resultTextBox.Font;
 		}
 
-		public void UpdateResultText()
+		private void OnNumber_Click(object sender, EventArgs e)
 		{
+			// Saving the sender as a button to access the button's text
+			Button button = (Button)sender;
 
+			// Clearing the resultTextBox when the text is 0 or an operation has been performed.
+			if ((resultTextBox.Text == "0" || operationPerformed) && !isDecimal)
+			{
+				resultTextBox.Clear();
+			}
+
+			// Adding the button's text to the resultTextBox regardless of the current text
+			resultTextBox.Text += button.Text;
+			operationPerformed = false;
 		}
 
-		private void IsInitialInput(bool eraseInput = true)
+		private void OnDecimal_Click(object sender, EventArgs e)
 		{
+			isDecimal = true;
 
+			if (operationPerformed)
+			{
+				resultTextBox.Text = "0";
+			}
+
+			resultTextBox.Text += ".";
+		}
+
+		private void OnOperand_Click(object sender, EventArgs e)
+		{
+			operationPerformed = true;
+			isDecimal = false;
+
+			// Saving the sender as a button to access the button's text
+			Button button = (Button)sender;
+
+			// The button's operation is saved within its tag, so we convert it to a string to determine the proper operation.
+			string tempOperationVisual = button.Text;
+			string tempOperationFunctional = button.Tag.ToString() ?? "null";
+
+			resultLabel.Text += $" {resultTextBox.Text} {tempOperationVisual}";
+
+			SwitchOnOperand();
+
+			result = double.Parse(resultTextBox.Text);
+			operationFunctional = tempOperationFunctional;
+		}
+
+		private void Clear_Click(object sender, EventArgs e)
+		{
+			resultTextBox.Text = "0";
+			resultLabel.Text = "";
+
+			isDecimal = false;
+			result = 0;
+			operationFunctional = "";
+		}
+
+		private void Equals_Click(object sender, EventArgs e)
+		{
+			operationPerformed = true;
+			resultLabel.Text = "";
+
+			SwitchOnOperand();
+
+			result = double.Parse(resultTextBox.Text);
+			resultTextBox.Text = result.ToString();
+
+			isDecimal = false;
+			result = 0;
+			operationFunctional = "";
+		}
+
+		private void SwitchOnOperand()
+		{
+			switch (operationFunctional.ToLower())
+			{
+				case "add":
+					resultTextBox.Text = CalculatorFunctions.SimpleAdd(result, double.Parse(resultTextBox.Text)).ToString();
+					break;
+				case "subtract":
+					resultTextBox.Text = CalculatorFunctions.SimpleSubtract(result, double.Parse(resultTextBox.Text)).ToString();
+					break;
+				case "multiply":
+					resultTextBox.Text = CalculatorFunctions.SimpleMultiply(result, double.Parse(resultTextBox.Text)).ToString();
+					break;
+				case "divide":
+					resultTextBox.Text = CalculatorFunctions.SimpleDivide(result, double.Parse(resultTextBox.Text)).ToString();
+					break;
+
+				default:
+					break;
+			}
 		}
 
 		// attempting to change text font size based on string length
-		private void textResult_TextChanged(object sender, EventArgs e)
+		private void Result_TextChanged(object sender, EventArgs e)
 		{
-			TextBox textBox = (TextBox)sender;
-
-			// Check if the text length is greater than or equal to the minimum length for font size change.
-			if (textBox.Text.Length >= 13)
+			resultTextBox.Font = AdjustFontBasedOnLength(resultTextBox.Text, defaultResultFont, 12);
+		}
+		public static Font AdjustFontBasedOnLength(string inputText, Font originalFont, int maxLength)
+		{
+			if (inputText.Length > maxLength)
 			{
-				// Define the maximum font size that fits within the TextBox
-				float maxFontSize = 100;
+				// Calculate the scaling factor based on the length of the text and maxLength.
+				double scaleFactor = (double)maxLength / inputText.Length;
 
-				// Create a graphics object to measure text size
-				using (Graphics g = textBox.CreateGraphics())
-				{
-					string text = textBox.Text;
-					Font currentFont = textBox.Font;
+				// Calculate the new font size by applying the scaling factor.
+				float newSize = originalFont.Size * (float)scaleFactor;
 
-					// Measure the size of the current text with the current font
-					SizeF textSize = g.MeasureString(text, currentFont);
-
-					// Calculate the scaling factors for width and height
-					float widthScale = textBox.Width / textSize.Width;
-					float heightScale = textBox.Height / textSize.Height;
-
-					// Use the smaller scaling factor to ensure the text fits within both width and height
-					float minScale = Math.Min(widthScale, heightScale);
-
-					// Calculate the new font size
-					float newFontSize = currentFont.Size * minScale;
-
-					// Ensure the font size does not exceed the maximum allowed size
-					if (newFontSize > maxFontSize)
-					{
-						newFontSize = maxFontSize;
-					}
-
-					// Create a new font with the calculated size and set it to the TextBox
-					textBox.Font = new Font(currentFont.FontFamily, newFontSize);
-				}
+				// Create and return a new font with the adjusted size.
+				return new Font(originalFont.FontFamily, newSize);
 			}
 			else
 			{
-				// resetting font size when threshold hasn't been met
-				textBox.Font = new Font(textBox.Font.FontFamily, 36);
+				// If the length is less than or equal to maxLength, return the original font.
+				return originalFont;
 			}
 		}
 
