@@ -8,7 +8,7 @@ namespace SimpleCalculator
 {
 	public class CalculatorFunctions
 	{
-		#region Operations
+
 		public static double SimpleAdd(double a, double b)
 		{
 			return a + b;
@@ -33,6 +33,10 @@ namespace SimpleCalculator
 			else
 				return a / b;
 		}
-		#endregion
+
+		public static double SimpleSquareRoot(double a)
+		{
+			return Math.Sqrt(a);
+		}
 	}
 }

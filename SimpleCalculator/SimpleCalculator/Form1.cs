@@ -26,11 +26,22 @@ namespace SimpleCalculator
 			defaultResultFont = resultTextBox.Font;
 		}
 
-		// TODO: Add square root and percent functions
-
 		private void buttonSquareRoot_Click(object sender, EventArgs e)
 		{
-			// button doesn't have any functionality
+			// Check if the value in resultTextBox is a valid number
+			if (double.TryParse(resultTextBox.Text, out double currentValue))
+			{
+				// Calculate the square root and update the resultTextBox
+				resultTextBox.Text = CalculatorFunctions.SimpleSquareRoot(currentValue).ToString();
+			}
+			else
+			{
+				// Handle invalid input (e.g., non-numeric value)
+				resultTextBox.Text = "Error";
+			}
+
+			operationPerformed = true;
+			isDecimal = false;
 		}
 
 		private void buttonPercentage_Click(object sender, EventArgs e)
